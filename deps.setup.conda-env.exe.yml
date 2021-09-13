@@ -16,12 +16,12 @@ tasks:
       if conda run -n {{.CVENV_NAME}} pwd &> /dev/null;
       then
           echo "Updating Existing conda Environment"
-          mamba env update -n {{.CVENV_NAME}} -f {{.conda_env_conf_file}}
+          conda env update -n {{.CVENV_NAME}} -f {{.conda_env_conf_file}}
       else
           echo "Creating New conda Environment"
           echo "@@@@@@" {{.conda_env_conf_file}}
           # cat {{.conda_env_conf_file}}
-          mamba env create -n {{.CVENV_NAME}} -f {{.conda_env_conf_file}}
+          conda env create -n {{.CVENV_NAME}} -f {{.conda_env_conf_file}}
       fi
     status:
     - |-
@@ -47,14 +47,8 @@ tasks:
         dir: '..'
         cmd: jupyter-lab --ip 0.0.0.0
 
-
-channels:
-- https://artifactory.sddc.mobileye.com/artifactory/api/conda/conda-condaforge-remote
-- https://artifactory.sddc.mobileye.com/artifactory/api/conda/conda-anaconda-remote
-
 dependencies:
 - "python>=3.7,<3.8"
-- "mxpcli>=0.16,<0.17"
 - jupyter
 - nb_conda
 - nb_conda_kernels

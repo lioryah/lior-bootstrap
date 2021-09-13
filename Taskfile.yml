@@ -2,6 +2,9 @@
 
 version: '3'
 
+includes: 
+  deps: deps.setup.conda-env.exe.yml
+  
 vars:
   GREETING: Hello, World!
 

@@ -1,6 +1,7 @@
 import cv2
+import sys
 
-path = '/mnt/c/users/liory/Downloads/parrot.jpg'
+path = sys.argv[1]
 
 img = cv2.imread(path)
 #cv2.imshow('image', img)

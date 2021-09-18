@@ -52,6 +52,7 @@ dependencies:
 - jupyter
 - nb_conda
 - nb_conda_kernels
+- opencv
 - ipdb
 - ipython
 - pytest

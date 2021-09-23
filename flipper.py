@@ -27,6 +27,8 @@ def flip_cli(src_path, text="LIOR", inter=False, dest_path=None, dest_suff=None,
     """
     from pathlib import Path
     img = cv2.imread(src_path)
+    if img is None:
+        raise Exception(f"file not found {src_path}")
     logger.info(f"loaded={src_path}")
     img_with_text = flip_img(img, text=text)
     if dbgout:

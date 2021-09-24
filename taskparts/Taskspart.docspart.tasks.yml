@@ -1,7 +1,7 @@
 version: "3"
 
 tasks:
-  serve-source:
+  publish:
    desc: serve documentation site from source
    cmds:
-    - mkdocs serve
+    - mkdocs ghpublish

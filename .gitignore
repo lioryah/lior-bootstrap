@@ -1,6 +1,11 @@
+# mkdocs exclusions
+__site__
+
+
 # drawio.vscode
 .drawio-chrome
 drawio_assets
+
 
 .vscode
 .idea

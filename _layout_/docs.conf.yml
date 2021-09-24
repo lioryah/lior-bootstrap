@@ -1,4 +1,9 @@
 items:
-  mkdocs.yml:
-    name: mkdocs.yml
-    
+
+  mkdocs:
+    configs:
+      - mkdocs.yml
+    consumers:
+      - taskapis/mkdocs.tasks.yml
+
+

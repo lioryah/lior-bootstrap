@@ -4,7 +4,7 @@ version: '3'
 
 includes:
   deps: deps.setup.conda-env.exe.yml
-  mkdocs: taskparts/Taskspart.mkdocs.tasks.yml
+  mkdocs: taskapis/mkdocs.tasks.yml
 
 vars:
   GREETING: Hello, World!

@@ -1,6 +1,7 @@
 #!/usr/local/bin/task --taskfile
 
 site_name: liorh/liorboot
+site_dir: __site__
 # site_url: https://athackst.github.io/mkdocs-simple-plugin
 # repo_url: https://github.com/athackst/mkdocs-simple-plugin
 # edit_uri: ''
@@ -36,9 +37,5 @@ markdown_extensions:
 ### https://taskfile.dev ###
 
 version: "3"
-
-tasks:
-  serve-source:
-   desc: serve documentation site from source
-   cmds:
-    - mkdocs serve
+includes:
+  mkdocs: taskapis/mkdocs.tasks.yml

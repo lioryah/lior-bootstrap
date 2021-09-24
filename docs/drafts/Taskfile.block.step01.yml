@@ -1,0 +1,50 @@
+# https://taskfile.dev
+
+version: '3'
+
+includes:
+  deps: deps.setup.conda-env.exe.yml
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+#  md
+#  > `task`: "add a task run-sample to Taskkfile"
+#
+# ```yaml
+  run-sample:
+    desc: run sample usage
+    vars:
+      input_img_path: 'Backchannel-Lena-Soderberg-FA.jpg'
+      output_img_path: '{{.input_img_path}}.run-sample._out.jpg'
+      __step_init__: 'echo "@@act=init ${__BLOCK_STR__}"'
+      __step_over__:
+    cmds:
+      - |-
+        __BLOCK_STR__="block=step goal='arrange. check that input exists'"
+
+        # run flipper
+        python liorboot/flipper.py \
+        {{.input_img_path}} \
+        --dest-path {{.output_img_path}}
+        echo @@act=over ${__BLOCK_STR__} result='file:{{.output_img_path}}'
+      - |-
+        __BLOCK_STR__="block=step goal='act. run filepper on sample'"
+        echo "@@act=init ${__BLOCK_STR__}"
+        # run flipper
+        python liorboot/flipper.py \
+        {{.input_img_path}} \
+        --dest-path {{.output_img_path}}
+        echo "@@act=over ${__BLOCK_STR__} result='file:{{.output_img_path}}'"
+      - |-
+        echo "@@act=init block=step goal='assert . run filepper on sample'"
+        # run python ad-hoc script
+        python -c '
+        import os.path
+        os.path.getsize("{{.output_img_path}}")
+        '
+        echo "@@act=init block=step goal='run filepper on sample'"
+
+# ```
+# /md

@@ -1,3 +1,7 @@
+# drawio.vscode
+.drawio-chrome
+drawio_assets
+
 .vscode
 .idea
 *._out.*

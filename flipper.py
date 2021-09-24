@@ -16,13 +16,19 @@ def flip_img(img, text="LIOR"):
 
     textsize = cv2.getTextSize(text, font, fontScale, thickness)[0]
     h, w, _ = flipVertical.shape
-    org = (int(w / 2 - textsize[0] / 2 ) , int(h / 2  + textsize[1] / 2 ))
+    org = (int(w / 2 - textsize[0] / 2), int(h / 2 + textsize[1] / 2))
 
-    img_with_text = cv2.putText(flipVertical, text, org, font, fontScale, color, thickness, lineType)
+    img_with_text = cv2.putText(flipVertical, text, org, font, fontScale,
+                                color, thickness, lineType)
     return img_with_text
 
 
-def flip_cli(src_path, text="LIOR", inter=False, dest_path=None, dest_suff=None, dbgout=False):
+def flip_cli(src_path,
+             text="LIOR",
+             inter=False,
+             dest_path=None,
+             dest_suff=None,
+             dbgout=False):
     """ Use --inter for show
     """
     from pathlib import Path
@@ -38,16 +44,18 @@ def flip_cli(src_path, text="LIOR", inter=False, dest_path=None, dest_suff=None,
         cv2.imshow('flipped image with text', img_with_text)
         cv2.waitKey(0)
     elif dest_path:
-        cv2.write(dest_path, img_with_text)
+        cv2.imwrite(dest_path, img_with_text)
     elif dest_suff:
-        res_path  = src_path + dest_suff
+        res_path = src_path + dest_suff
         cv2.imwrite(os.path.join(res_path), img_with_text)
     else:
         logger.warning(f"no out provided. size {img_with_text.shape[:2]}")
 
+
 def main_():
     import fire
     fire.Fire(flip_cli)
+
 
 if __name__ == '__main__':
     main_()

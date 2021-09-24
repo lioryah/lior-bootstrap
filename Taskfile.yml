@@ -2,9 +2,10 @@
 
 version: '3'
 
-includes: 
+includes:
   deps: deps.setup.conda-env.exe.yml
-  
+  # tests: Taskspart.tests.tasks.yml
+
 vars:
   GREETING: Hello, World!
 
@@ -15,13 +16,37 @@ tasks:
       - task -l
     silent: true
 
+  run-tests:
+    desc: run project tests
+    cmds:
+      - task: deps:with-venv
+        vars:
+          cmd: task -d tests basic-test-flow
+
   show-homedir-size:
     desc: _
     cmds:
       - du -sh ~
-  
+
   show-vscode-proc:
     desc: _
     cmds:
       - ps -fade | grep vscode
-    
+
+#  md
+#  > `task`: "add a task run-sample to Taskkfile"
+#
+# ```yaml
+  run-sample:
+    desc: run sample usage. samples. task run-sample quite=1 --silent
+    vars:
+      input_img_path: 'Backchannel-Lena-Soderberg-FA.jpg'
+      output_img_path: '{{.input_img_path}}.run-sample._out.jpg'
+    cmds:
+      - |-
+        python flipper.py \
+          {{.input_img_path}} \
+          --dest-path {{.output_img_path}}
+
+# ```
+# /md

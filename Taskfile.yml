@@ -44,7 +44,7 @@ tasks:
       output_img_path: '{{.input_img_path}}.run-sample._out.jpg'
     cmds:
       - |-
-        python flipper.py \
+        python liorboot/flipper.py \
           {{.input_img_path}} \
           --dest-path {{.output_img_path}}
 

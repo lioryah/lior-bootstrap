@@ -25,7 +25,7 @@ tasks:
         __BLOCK_STR__="block=step goal='arrange. check that input exists'"
 
         # run flipper
-        python liorboot/flipper.py \
+        python liorboot/liorboot/flipper.py \
         {{.input_img_path}} \
         --dest-path {{.output_img_path}}
         echo @@act=over ${__BLOCK_STR__} result='file:{{.output_img_path}}'
@@ -33,7 +33,7 @@ tasks:
         __BLOCK_STR__="block=step goal='act. run filepper on sample'"
         echo "@@act=init ${__BLOCK_STR__}"
         # run flipper
-        python liorboot/flipper.py \
+        python liorboot/liorboot/flipper.py \
         {{.input_img_path}} \
         --dest-path {{.output_img_path}}
         echo "@@act=over ${__BLOCK_STR__} result='file:{{.output_img_path}}'"

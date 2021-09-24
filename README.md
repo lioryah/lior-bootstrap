@@ -2,14 +2,24 @@
 
 Image Processing Samples
 
-# install environent
+## develop env setup
+
+> install environent
 
 ```bash
 task deps:install
 ```
 
+> to activate use `conda activate local-ci-config-cenv`
+
+## test
+
+`task run-tests`
+`task -d tests -l`
+
+- [ More on tests](./tests/README.md)
+
 # Usage
 
-- `❯ python flipper.py Backchannel-Lena-Soderberg-FA.jpg --text dudu --dbgout`
-- `❯ python flipper.py Backchannel-Lena-Soderberg-FA.jpg --dest-path lenoa._out.jpg`
-
+- `❯ python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --text dudu --dbgout`
+- `❯ python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --dest-path lenoa._out.jpg`

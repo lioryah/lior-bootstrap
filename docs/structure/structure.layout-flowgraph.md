@@ -4,10 +4,10 @@
 
 ```mermaid
 flowchart LR
-  subgraph PROJECT_PARTS[_layout_]
+  subgraph PROJECT_PARTS["_layout_/parts.conf.yaml"]
       direction LR
-      root --> part-vers
-      root --> part-docs
+      part-vers["items.vers"]
+      part-docs["items.docs"]
   end
   subgraph VERSIONS_PART_MANAGED[vers-managed]
       direction LR
@@ -15,49 +15,47 @@ flowchart LR
       changelog["docs/changelog.md"]
       version_prefix_txt
   end
-  subgraph VERSIONS_PART
+  subgraph VERSIONS_PART[conf-set]
       direction LR
-      part-ly["part.vers=_layout_/parts.conf.yml@items.vers"]
-
-      part-ly --> settings["settings:./version/*.txt"]
+      part-vers --> part-ly["task -d version"]
       part-ly --> procs-tasks["procs: ./version/Taskfile.yml"]
+      part-ly --> settings["settings:./version/*.txt"]
       part-ly --> source-content["source-content: task gitinfo:some"]
-      settings --> apply-version-task
-      procs-tasks --> apply-version-task
-      source-content --> apply-version-task
-      apply-version-task --> bump-version
-      apply-version-task --> gen-changelog
+      settings --> apply-version-task-api
+      procs-tasks --> apply-version-task-api
+      source-content --> apply-version-task-api
+  end
 
+  subgraph apply-version-task-api[api-set]
+      direction LR
       bump-version --> version_prefix_txt
       gen-changelog --> changelog
-      settings_read["settings:./version/version_prefix.txt"]--> gen-changelog
   end
-  part-vers --> part-ly
-  subgraph DOCUMENTAION_PART_MANAGED["docs-managed"]
+
+  subgraph DOCUMENTAION_PART_MANAGED["docs-targets"]
       direction TB
       __site__["__site__"]
-      http_res["h"]
+      http_res["http://localhost:8000"]
   end
   subgraph DOCUMENTAION_PART
       direction LR
-      part-layout --> part-procs[tasks-procs: mkdocs:build-site]
-      part-layout["part.docs=_layout_/parts.conf.yml@items.docs"]
-          --> part-config[task-conf: mkdocs.yml]
-      part-config --> part-source["part-sources:*.md, docs/*"]
-      part-config --> product-path
-      part-config --> part-procs
+      part-config["task -t mkdocs.yml"]
+      part-config --> part-procs["procs: task -t mkdocs.yml"]
+      part-config --> product-path["settings: ./mkdocs.yml"]
+      part-config --> part-source["source-content:*.md, docs/*"]
 
-      part-procs --> apply-docs-task
-      part-source --> apply-docs-task
-      product-path --> apply-docs-task
+      part-procs --> apply-docs-task-api
+      part-source --> apply-docs-task-api
+      product-path --> apply-docs-task-api
 
-      apply-docs-task --> mkdocs-build-site
-      apply-docs-task --> mkdocs-serve-site
-      mkdocs-build-site --> __site__
-      mkdocs-serve-site --> http_res
 
   end
-  part-docs --> part-layout
+  subgraph apply-docs-task-api[api-set]
+      direction LR
+      mkdocs-build-site --> __site__
+      mkdocs-serve-site --> http_res
+  end
+  part-docs --> part-config
 ```
 
 ### links sample

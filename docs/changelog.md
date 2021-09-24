@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.0.4-2021.09.24.pre
+
+- structure entry page
+
+## v0.0.3-2021.09.24
+
+- NEW: mkdocs serve and build taskapis
+- NEW: mkdocs site deploy to github pages https://yairdar.github.io/lior-bootstrap---a926e7b3b/
+
 ## v0.0.2-2021.09.24
 
 - add tests dir with interface Taskfile and tasks.flows

@@ -28,7 +28,8 @@ def flip_cli(src_path,
              inter=False,
              dest_path=None,
              dest_suff=None,
-             dbgout=False):
+             dbgout=False,
+             return_img=False):
     """ Use --inter for show
     """
     from pathlib import Path
@@ -50,6 +51,9 @@ def flip_cli(src_path,
         cv2.imwrite(os.path.join(res_path), img_with_text)
     else:
         logger.warning(f"no out provided. size {img_with_text.shape[:2]}")
+
+    if return_img:
+        return img_with_text
 
 
 def main_():

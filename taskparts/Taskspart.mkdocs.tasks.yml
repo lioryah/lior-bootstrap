@@ -1,0 +1,7 @@
+version: "3"
+
+tasks:
+  serve-source:
+   desc: serve documentation site from source
+   cmds:
+    - mkdocs serve

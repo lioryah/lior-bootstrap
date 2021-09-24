@@ -2,11 +2,17 @@
 
 ## v0.0.2-2021.09.24
 
+- add tests dir with interface Taskfile and tasks.flows
+- implement test for run-sample task `test-task-run-sample` at `testpart.basic-tests.tasks.yml`
+- add more readme and docs
+
+## v0.0.1-2021.09.23
+
 - add changelog and structure docs
 - add dir liorboot and rename project to liorboot
 - add task run-sample for usage executable sample
 
-## v0.0.1-2021.09.19
+## v0.0.0-2021.09.19
 
 - add version and project name `lior_bootstrao`
 - use fire for argument parsing (bind flipper_cli method)

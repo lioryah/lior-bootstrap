@@ -2,6 +2,10 @@
 
 Image Processing Samples
 
+## Get Started
+
+> Take look on the [demo notebook](./demo.ipynb)
+
 ## develop env setup
 
 > install environent
@@ -12,14 +16,32 @@ task deps:install
 
 > to activate use `conda activate local-ci-config-cenv`
 
+## Usage
+
+> get help `python liorboot/flipper.py --help`
+
+> sample usage `task run-sample --dry`
+
+### live documentaion
+
+> `task mkdocs:serve`
+
+### cli usages
+
+```bash
+# task: [run-sample]
+python liorboot/flipper.py \
+  Backchannel-Lena-Soderberg-FA.jpg \
+  --dest-path Backchannel-Lena-Soderberg-FA.jpg.run-sample._out.jpg
+```
+
+```bash
+python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --text dudu --dest-path readme.usage._out.jpg
+python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --dest-suff .lenoa._out.jpg
+```
+
 ## test
 
-`task run-tests`
-`task -d tests -l`
-
+- `task run-tests`
+- `task -d tests -l`
 - [ More on tests](./tests/README.md)
-
-# Usage
-
-- `❯ python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --text dudu --dbgout`
-- `❯ python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --dest-path lenoa._out.jpg`

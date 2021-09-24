@@ -4,7 +4,7 @@ version: '3'
 
 includes:
   deps: deps.setup.conda-env.exe.yml
-  # tests: Taskspart.tests.tasks.yml
+  mkdocs: taskparts/Taskspart.mkdocs.tasks.yml
 
 vars:
   GREETING: Hello, World!
@@ -38,15 +38,16 @@ tasks:
 #
 # ```yaml
   run-sample:
-    desc: run sample usage. samples. task run-sample quite=1 --silent
+    desc: run sample usage. samples. task run-sample quite=1 --silent.
     vars:
       input_img_path: 'Backchannel-Lena-Soderberg-FA.jpg'
-      output_img_path: '{{.input_img_path}}.run-sample._out.jpg'
+      output_img_path: 'Backchannel-Lena-Soderberg-FA.jpg.run-sample._out.jpg'
     cmds:
       - |-
         python liorboot/flipper.py \
           {{.input_img_path}} \
           --dest-path {{.output_img_path}}
+      - echo .@@output_img_path={{.output_img_path}}
 
 # ```
 # /md

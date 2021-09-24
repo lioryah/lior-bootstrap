@@ -46,3 +46,7 @@ python liorboot/flipper.py Backchannel-Lena-Soderberg-FA.jpg --dest-suff .lenoa.
 - `task run-tests`
 - `task -d tests -l`
 - [ More on tests](./tests/README.md)
+
+## misc
+
+versions=https://openbase.com/js/mermaid/versions

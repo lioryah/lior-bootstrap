@@ -1,10 +1,10 @@
-# Structure
+# Structure. CICD
 
 ## Project Layout Parts
 
 ### with drawio.png
 
-![repo-ci-full.diag.drawio.png](structure.md.diagrams/repo-ci-full.diag.drawio.png "repo-ci-full.diag.drawio.png")
+![structure.cicd-pipeline.diag.drawio.png](./structure.cicd-pipeline.diag.drawio.png "structure.cicd-pipeline.diag.drawio.png")
 
 ### FlowCharts
 
@@ -46,3 +46,4 @@ journey
       =>: 5: main
       publish-flow-docs: 5: main
 ```
+

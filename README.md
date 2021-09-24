@@ -1,10 +1,11 @@
-# lior-bootstrap
+# About
 
 Image Processing Samples
 
 ## Get Started
 
-> Take look on the [demo notebook](./demo.ipynb)
+> - Take look on the [Demo Notebook](./demo.ipynb)
+> - Checkout [Documentation Site](https://yairdar.github.io/lior-bootstrap---a926e7b3b)
 
 ## develop env setup
 

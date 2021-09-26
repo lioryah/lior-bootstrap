@@ -4,10 +4,10 @@
 
 ```mermaid
 flowchart LR
-  subgraph PROJECT_PARTS["_layout_/parts.conf.yaml"]
+  subgraph PROJECT_PARTS["_layout_/"]
       direction LR
-      part-vers["items.vers"]
-      part-docs["items.docs"]
+      part-vers["parts.conf.yaml@items.vers"]
+      part-docs["parts.conf.yaml@items.docs"]
   end
   subgraph VERSIONS_PART_MANAGED[vers-managed]
       direction LR
@@ -15,21 +15,21 @@ flowchart LR
       changelog["docs/changelog.md"]
       version_prefix_txt
   end
-  subgraph VERSIONS_PART[conf-set]
+  subgraph VERSIONS_PART[vers: conf-set]
       direction LR
-      part-vers --> part-ly["task -d version"]
-      part-ly --> procs-tasks["procs: ./version/Taskfile.yml"]
-      part-ly --> settings["settings:./version/*.txt"]
-      part-ly --> source-content["source-content: task gitinfo:some"]
-      settings --> apply-version-task-api
-      procs-tasks --> apply-version-task-api
-      source-content --> apply-version-task-api
+      part-vers --- part-ly["task -d version"]
+      part-ly --- procs-tasks["procs: ./version/Taskfile.yml"]
+      part-ly --- settings["settings:./version/*.txt"]
+      part-ly --- source-content["source-content: task gitinfo:some"]
+      settings --- apply-version-task-api
+      procs-tasks --- apply-version-task-api
+      source-content --- apply-version-task-api
   end
 
-  subgraph apply-version-task-api[api-set]
+  subgraph apply-version-task-api[vers: api-set]
       direction LR
-      bump-version --> version_prefix_txt
-      gen-changelog --> changelog
+      bump-version --- version_prefix_txt
+      gen-changelog --- changelog
   end
 
   subgraph DOCUMENTAION_PART_MANAGED["docs-targets"]
@@ -37,7 +37,7 @@ flowchart LR
       __site__["__site__"]
       http_res["http://localhost:8000"]
   end
-  subgraph DOCUMENTAION_PART
+  subgraph DOCUMENTAION_PART[docs: conf-set]
       direction LR
       part-config["task -t mkdocs.yml"]
       part-config --> part-procs["procs: task -t mkdocs.yml"]
@@ -50,7 +50,7 @@ flowchart LR
 
 
   end
-  subgraph apply-docs-task-api[api-set]
+  subgraph apply-docs-task-api[docs: api-set]
       direction LR
       mkdocs-build-site --> __site__
       mkdocs-serve-site --> http_res

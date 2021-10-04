@@ -10,7 +10,7 @@ def flip_img(img, text="LIOR"):
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     fontScale = 10
-    color = (0, 0, 0)
+    color = (0, 0, 0)   
     thickness = 5
     lineType = cv2.LINE_AA
 

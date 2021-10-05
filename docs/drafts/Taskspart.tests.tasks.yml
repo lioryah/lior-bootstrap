@@ -1,0 +1,61 @@
+version: "3"
+vars:
+  _title_: tests taskpart
+
+tasks:
+#  md
+# ```yaml
+
+  run-as-step:
+    desc: runs provided cmd as step
+    args:
+      block_keytok: block id key token. sample. "block=step goal='arrange. check that input exists'"
+      step_body: step commands text
+    vars:
+      step_header: __block_key__="{{.block_key}}"
+      step_init: '{{ if .quite }}      {{else}} echo @[task]@ act=init ${__block_key__} {{end}}'
+      step_over: '{{ if .quite }} echo {{else}} echo @[task]@ act=over ${__block_key__} {{end}}'
+    cmds:
+      - |-
+        {{.step_init}}
+        {{.step_body}}
+        {{.step_over}}
+
+  test-task-run-sample:
+    desc: test that run-sample task is working
+    vars:
+      input_img_path: 'Backchannel-Lena-Soderberg-FA.jpg'
+      output_img_path: '{{.input_img_path}}.run-sample._out.jpg'
+      _def_arrange: |-
+        python -c 'import os.path; assert os.path.exists("{{.input_img_path}}")'
+      _def_action: |-
+        task run-sample input_img_path={{.input_img_path}} output_img_path={{.output_img_path}}
+      _def_assert: |-
+        import os.path
+        assert os.path.exists("{{.output_img_path}}"), "Missing File"
+        size = os.path.getsize("{{.output_img_path}}")
+        assert size > 0, "Empty File"
+        print(size)
+    cmds:
+      - |-
+        __block_key__="block=step goal='arrange. check that input exists'"
+        {{.__step_init__}}
+        {{._def_arrange}}
+        {{.__step_over__}}
+      - |-
+        __block_key__="block=step goal='act. run filepper on sample'"
+        {{.__step_init__}}
+        {{.run_sample_cmd}}
+        {{.__step_over__}} result.file='{{.output_img_path}}'
+      - |-
+        __block_key__="block=step goal='assert . run filepper on sample'"
+        {{.__step_init__}}
+        # run python ad-hoc script to test size ###
+        RESULT_KEYTOK=`python -c '
+        {{._def_assert}}
+        '`
+        {{.__step_over__}} ${RESULT_KEYTOK}
+
+# ```
+# /md
+

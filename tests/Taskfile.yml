@@ -1,0 +1,17 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task -l
+
+  basic-test-flow:
+    desc: run basic tests
+    cmds:
+      - task -t testpart.basic-tests.tasks.yml test-task-run-sample

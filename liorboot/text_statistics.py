@@ -1,5 +1,3 @@
-
-from os import path
 import os
 
 path1 = '/mnt/c/users/liory/_wd/repos/lior-bootstrap/txt/txt1.txt'

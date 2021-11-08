@@ -56,9 +56,15 @@ def flip_cli(src_path,
         return img_with_text
 
 
+def hello(name = "world"):
+    print(f"hello {name}")
+
+
 def main_():
-    import fire
-    fire.Fire(flip_cli)
+#    import fire
+#    fire.Fire(flip_cli)
+
+    fire.Fire()
 
 
 if __name__ == '__main__':

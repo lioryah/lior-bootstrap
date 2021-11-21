@@ -44,7 +44,7 @@ tasks:
       output_img_path: 'Backchannel-Lena-Soderberg-FA.jpg.run-sample._out.jpg'
     cmds:
       - |-
-        python liorboot/flipper.py flip_img \
+        python liorboot/flipper.py flip_cli \
           {{.input_img_path}} \
           --dest-path {{.output_img_path}}
       - echo .@@output_img_path={{.output_img_path}}
@@ -58,7 +58,8 @@ tasks:
       src_img_path: 'Backchannel-Lena-Soderberg-FA.jpg'
       dest_img_path: 'Backchannel-Lena-Soderberg-FA.jpg.run-sample._out.jpg'
     cmds:
-      - python liorboot/flipper_qa.py \ 
+      - |-
+        python liorboot/flipper_qa.py \ 
            {{.src_img_path}} \
            {{.dest_img_path}} 
-     # - echo .@@
+     

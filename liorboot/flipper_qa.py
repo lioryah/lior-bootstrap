@@ -3,8 +3,8 @@ import numpy as np
 from flipper import flip_img
 import cv2 
 import tensorflow as tf
-
-
+import pytesseract
+from PIL import Image
 
 def mse_img(imageA, imageB):
 	# the 'Mean Squared Error' between the two images is the
@@ -49,17 +49,42 @@ def validate_flipper(source, dest): #source is the reference
         return False
 
 
-def validate_with_text(source, dest):
-     # search for more images comparing methods
-    
-    return 1
+def validate_with_text(source):
+     # search for more images comparing methods 
+    text = pytesseract.image_to_string(source)
+
+    return text
 
 def main_(): 
-    src_path = "/mnt/c/Users/liory/_wd/repos/lior-bootstrap/Backchannel-Lena-Soderberg-FA.jpg"
+    src_path = "/mnt/c/Users/liory/_wd/repos/lior-bootstrap/Backchannel-Lena-Soderberg-FA.jpg.flip._out.jpg"
     source = cv2.imread(src_path)
+    text = pytesseract.image_to_string(source, lang = 'eng')
+    print(text)
 
-    cv2.imshow("source img", source)
-    cv2.waitKey(1)   
+    # Create a black image
+    img = np.zeros((512,512,3), np.uint8)
+
+    # Write some Text
+
+    font                   = cv2.FONT_HERSHEY_SIMPLEX
+    bottomLeftCornerOfText = (10,500)
+    fontScale              = 1
+    fontColor              = (255,255,255)
+    lineType               = 2
+
+    cv2.putText(img,'Hello World!', 
+        bottomLeftCornerOfText, 
+        font, 
+        fontScale,
+        fontColor,
+        lineType)
+    cv2.imshow("img", img)
+    cv2.waitKey(1)
+    
+    
+
+    # cv2.imshow("source img", source)
+    # cv2.waitKey(1)   
     
     # test 1 change lumintion to image
     dest = flip_img(source, " ")
@@ -74,7 +99,7 @@ def main_():
     cv2.imshow("flipped img", dest)
     cv2.waitKey(0)
     '''
-    print(validate_flipper(source, dest))
+    print(validate_with_text(source))
    # fire.Fire(validate_flipper)
     
     print(1)

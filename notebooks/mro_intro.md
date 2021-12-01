@@ -33,7 +33,7 @@ print(produce.__bases__)
 
 ## What is the `__mro__` attribute?
 
-```
+```python
 class stock():
     pass
 

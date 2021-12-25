@@ -1,0 +1,4 @@
+Jim - salesman
+Dwight - salesman
+Pam - receptionist
+Michael - manager

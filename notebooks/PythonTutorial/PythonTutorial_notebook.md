@@ -151,6 +151,7 @@ Age = 21
 def is_major(Age):
        return 'Major' if Age > 18 else 'Minor'
 # ShortHand Ternary operator
+
 ```
 
 # Lambda function

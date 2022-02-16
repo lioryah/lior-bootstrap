@@ -129,7 +129,7 @@ from functools import reduce
 def Timer(arg):
     def decorator(func):
         def fun(*args):
-            start = timer()
+            start = timer(c)
             out = func(*args)
             stop = timer()
             elapsed = stop-start

@@ -11,10 +11,8 @@ newlist = [expression for item in iterable if condition == True]
  The expression can also contain conditions, not like a filter, but as a way to manipulate the outcome.
  
  '''
-
 #%%
 from numpy import size
-
 
 fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
 newlist = []
@@ -24,15 +22,15 @@ for x in fruits:
     newlist.append(x)
 print(newlist)
 
-# equivelant to:
-
+# is equivelant to:
 newlist = [x for x in fruits if "a" in x]
 print(newlist)
 
+
+#%%
 def to_x(x):
   _it = x if x != "banana" else "orange"
   return _it
-
 
 newlist = [to_x(x) for x in fruits] # banana should change to orange
 print(newlist)
@@ -49,13 +47,11 @@ new_multi
 
 
 # %% 
-
 multi_2 =  map(lambda x: x*2, new_list)
 type(multi_2)
 
 
 # %%
- 
 # no_fours = (x for x in multi_2 if x%4 == 0)
 # no_fours
 
@@ -74,17 +70,6 @@ def gen_fours(_list):
 # %%
 second_pow = [x*x for x in gen_fours(multi_2) ]
 second_pow
-
-
-# %%
-if x == 4:
-    y = 5
-else:
-    y = 10
-
-
-# %%
-w  = 5 if x == 4 else 10
 
 
 # %%
@@ -140,16 +125,9 @@ print(string_to_dict_comp)
 # %%
 div_by_single_digit = [x for y in range(2,10) for x in range(1,1001) if x%y == 0]
 print(sorted(div_by_single_digit))
+
+
 # %%
 div_by_high_single_digit = {x : y for x in range(1,1001) for y in range(2,10) if  x % y == 0}
 print(div_by_high_single_digit)
-# %%
 
-
-# %%
-
-# %%
-
-# %%
-
-# %%

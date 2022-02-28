@@ -108,16 +108,6 @@ s = [1, 2, 3, 4]
 itertools.permutations(s, 4)
 
 
-# %%
-iterable = "ABCD"
-pool = tuple(iterable)
-n = len(pool)
-
-indices = list(range(n))
-
-tuple_of_ind = tuple(pool[i] for i in indices[:n])
-print(pool)
-
 
 # %%
 def permutations_new(iterable, r=None):
@@ -141,14 +131,12 @@ def permutations_new(iterable, r=None):
                 j = cycles[i]
                 indices[i], indices[-j] = indices[-j], indices[i]
                 yield tuple(pool[i] for i in indices[:r])
-                yield indices
-                yield cycles
                 break
         else:
             return
 
 
-for x in permutations_new("ABC"):
+for x in permutations_new("ABCD"):
     print(x)
     
     # %%

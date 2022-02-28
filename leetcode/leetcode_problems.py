@@ -5,6 +5,7 @@ Given an array of integers nums and an integer target, return indices of the two
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 You can return the answer in any order.
 '''
+from typing import List
 from matplotlib.cbook import index_of
 from pygments import highlight
 
@@ -110,4 +111,131 @@ height = [1,8,6,2,5,4,8,3,7]
 
 print(s.maxArea2(height))
 
+
 # %%
+# 53. Maximum Subarray
+'''
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+A subarray is a contiguous part of an array.
+'''
+import itertools
+
+class Solution:
+    
+    def maxSubArray(self, nums) -> int:
+        accumulated_nums = [x for x in itertools.accumulate(nums)]
+        
+        l = len(accumulated_nums)
+        if l == 1:
+            return nums[0]
+        start = 0
+        end = 1
+        for i in range(1,l):
+            if accumulated_nums[i] > accumulated_nums[i-1]:
+                end = i
+            else:
+                start = i
+        
+        return accumulated_nums[end] - accumulated_nums[start]
+
+
+
+    def maxSubArray2(self, nums) -> int:
+        final_list = [max(nums)]
+        max_num = nums[0]
+        if max(nums) > 0:
+            for element in nums[1:len(nums)]:				
+                if max_num < 0:
+                    max_num = 0			
+                    max_num += element
+                final_list.append(max_num)
+
+        return sorted(final_list)[-1]
+
+
+s = Solution()
+inp = [-2,1,-3,4,-1,2,1,-5,4]
+print("not mine " + str(s.maxSubArray2(inp)))
+inp = [1]
+s.maxSubArray(inp)
+inp = [5,4,-1,7,8]
+s.maxSubArray(inp)
+
+
+# %%
+# 139. Word Break
+'''
+Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+Note that the same word in the dictionary may be reused multiple times in the segmentation.
+'''  
+from typing import List
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:        
+        while s != '':
+            for i in range(len(s)+1):
+                print(s[:i])
+                if s[:i] in wordDict:
+                    if Solution.wordBreak(self, s = s[i:], wordDict = wordDict):
+                        print(s[i:])
+                        return True
+                    else:
+                        continue
+            return False
+        else:
+            return True
+
+
+    def wordBreak2(self, s: str, wordDict: List[str]) -> bool:
+        if len(s) == 1:
+            return True
+
+
+    # solution from leetcode comments
+    def wordBreak3(self, s, wordDict):
+        ok = [True]
+        for i in range(1, len(s)+1):
+            ok += any(ok[j] and s[j:i] in wordDict for j in range(i)),
+        return ok[-1]
+
+
+    # solution from leetcode comments
+    def wordBreak4(self, s, wordDict):
+        ok = [True]
+        max_len = max(map(len,wordDict+[''])) # max len of word in dictionary
+        wordDict = set(wordDict)
+        for i in range(1, len(s)+1):
+            ok += any(ok[j] and s[j:i] in wordDict for j in range(max(0, i-max_len),i)),
+        return ok[-1]
+
+
+s = Solution()
+print(s.wordBreak4(s = "aaaaaaa", wordDict = ["aaa","aaaa"]))
+# %%
+
+# %%
+square_dict = dict()
+for num in range(1, 11):
+    square_dict[num] = num*num
+print(square_dict)
+
+# dictionary comprehension example
+square_dict = {num: num*num for num in range(1, 11)}
+print(square_dict)
+
+tup_list = [(x,x*x) for x in range(1,11)]
+print("tup_list")
+print(tup_list)
+
+# %%
+def decorate(func):
+    print(func.x)
+    print(func)
+
+# %%
+
+@decorate
+def foo(x):
+  return x +x
+
+
+foo(3)

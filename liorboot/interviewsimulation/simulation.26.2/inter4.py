@@ -45,14 +45,32 @@ def measure_time(func):
 
     return inner
 
-@measure_time
-def get_completions4(my_db : dict, prefix : str) -> list:
+
+def iter_suffixes(my_db):
+    yield ''
+
+# agrregator 
+def collect_suffixes(my_db, limit):
+    res = []
+    for suffix in iter_suffixes(my_db=my_db):
+        if len(res) == limit:
+            break
+        res.append(suffix)
+    return res
+
+
+# @measure_time
+# TODO. seperate function to 2 fuctions: get subtree after prefix. 
+# collect all suffix with yeild - 
+# create method iter_suffixes(my_db) which can be used in next form (yeild) 
+# create func add_to_db
+def get_completions4(my_db: dict, prefix: str, limit: int = 20) -> list:
     flat_dict = flatten_dict(my_db)
     
     res = []
     i = 0
     ctr = 0
-    while ctr < 20 and i < len(flat_dict):
+    while ctr < limit and i < len(flat_dict):
         if flat_dict[i].startswith(prefix):
             res.append(flat_dict[i])
             ctr += 1
@@ -72,7 +90,7 @@ print(my_db)
 
 prefix = 'ba'
 print('tokens that have prefix \'' + prefix + '\':')
-print(get_completions4(my_db, prefix))
+print(get_completions4(my_db, prefix, limit=1))
 
 #%%
 

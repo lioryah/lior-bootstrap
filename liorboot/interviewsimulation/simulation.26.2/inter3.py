@@ -28,14 +28,8 @@ def get_completions3(my_db, prefix):
 
 
 #%%
-my_db = load_tokens3("tokens.txt")
+my_db = load_tokens3("tokens2.txt")
 my_db
 # %%
 
-print(get_completions3(my_db, "bar"))
-
-# %%
-import inter4
-
-my_db2 = inter4.load_tokens4("tokens.txt")
-# %%
+print(get_completions3(my_db, "bal"))

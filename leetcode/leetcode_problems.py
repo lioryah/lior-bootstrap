@@ -6,7 +6,9 @@ You may assume that each input would have exactly one solution, and you may not 
 You can return the answer in any order.
 '''
 from typing import List
+from cv2 import add
 from matplotlib.cbook import index_of
+from pandas import to_datetime
 from pygments import highlight
 
 
@@ -59,7 +61,88 @@ print(s.isPalindrome(x = 121))
 print(s.isPalindrome(x = -121))
 print(s.isPalindrome(x = 10))
 
+# %%
+# 2. Add Two Numbers
 
+from typing import Optional 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        l1_curr = l1
+        l2_curr = l2
+        l3 = ListNode(val=0)
+        l3_curr = l3
+        curr_sum = 0
+
+        if curr_sum <= 9: 
+            l3_curr.val = l1_curr.val + l2_curr.val
+        else:
+            l3_curr.val = (l1_curr.val + l2_curr.val)%10   
+            carry = 1
+        while(l1_curr.next or l2_curr.next):
+            l3_curr.next = ListNode()
+            curr_sum = 0
+            if l1_curr.next:
+                curr_sum += l1_curr.next.val
+            if l2_curr.next:
+                curr_sum += l2_curr.next.val
+            curr_sum += carry
+            
+            if curr_sum > 9: 
+                carry = 1
+                curr_sum = curr_sum%10
+            else:
+                carry = 0
+            
+            l3_curr.next.val = curr_sum
+
+
+res = Solution()
+print(res.addTwoNumbers(l1 = [2,4,3], l2 = [5,6,4]))
+
+# %%
+from typing import Optional 
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+# --- solution2 in different and shorter way ---
+class Solution2:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        carry = 0
+        l1l = ListNode
+        l3_root = ListNode(0)
+        l3_curr = l3_root
+        
+
+        while l1 or l2 or carry:
+            if l1:
+                v1 = l1.val
+                l1 = l1.next
+            if l2:
+                v2 = l2.val
+                l2 = l2.next
+            
+            carry, l3_curr.val = divmod(v1+v2+carry, 10)
+            l3_curr = l3_curr.next
+            # l3_curr.next = ListNode(0)
+        return l3_root
+
+    def transform_to_listnode(self, l1, l2):
+        l1l = ListNode(0)
+        for i1 in l1:
+            l1l = ListNode(i1)
+            
+
+res = Solution2()
+print(res.addTwoNumbers(l1 = [2,4,3], l2 = [5,6,4]))
 # %%
 # 11. Container With Most Water
 '''

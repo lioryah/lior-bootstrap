@@ -23,7 +23,7 @@ def pymongo_demo(connection_conf:str):
     except Exception:
         print("Unable to connect to the server.")
 
-    #
+    
     db = client.gettingStarted
 
     people = db.people
@@ -36,14 +36,20 @@ def pymongo_demo(connection_conf:str):
         "views": 1250000
     }
 
-    people.insert_one(personDocument)
+    personDocument2 = {
+        "name": {"first": "Lior", "last": "Yahav"},
+        "birth": datetime.datetime(1987, 10, 13),
+        "views": 123456
+    }
 
-    people.find_one({"name.last": "Turing"})
+    # people.insert_one(personDocument2)
+
+    print(people.find_one({"name.last": "Yahav"}))
 
 
 
 def _main():
-    pymongo_demo()
+    pymongo_demo("cluster0")
 
 if __name__ == '__main__':
     _main()

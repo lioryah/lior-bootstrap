@@ -97,7 +97,7 @@ def _main():
     9. add documents from file(file.txt)
     '''
     # [db_name, coll_name] = get_db_coll_user()
-    [db_name, coll_name] = ["tokens", "tokens2466"]
+    [db_name, coll_name] = ["tokens", "tokens2466"] 
     curr_coll = client[db_name][coll_name]
     
     choice = int(input(menu_msg))
